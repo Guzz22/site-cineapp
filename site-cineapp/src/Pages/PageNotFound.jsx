@@ -1,6 +1,6 @@
 function PageNotFound() {
     return ( 
-        <h1> Error </h1>
+        <h1 className="font-Inter"> Error </h1>
      );
 }
 

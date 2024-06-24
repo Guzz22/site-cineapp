@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Filmes from './Pages/Filmes.jsx'
 import PageNotFound from './Pages/PageNotFound.jsx'
 import Home from './Pages/Home.jsx'
+import DetalhesFilme from './Pages/DetalhesFilme.jsx'
 
 const router = createBrowserRouter(
   [
@@ -14,7 +15,9 @@ const router = createBrowserRouter(
       element: <App/>,
       children: [
         {index: true, element: <Home/>},
+        {path: "/:id", element: <DetalhesFilme/>},
         {path: "filmes", element:<Filmes/>},
+        {path: "filmes/:id", element:<DetalhesFilme/>},
         {path: "*", element: <PageNotFound/>}
       ]
     }

@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 
 function Home() {
     const [filmes, setFilmes] = useState([])
@@ -23,19 +21,21 @@ function Home() {
     
     return (
         <>
-        <h1 className="flex justify-center text-3xl text-white font-MontaguSlab mt-10 mb-10">Filmes</h1>
-        <div className="flex flex-col w-[1780px] m-8 ml-[55px]">
+        <h1 className="flex justify-center text-3xl text-white font-Inter mt-10 mb-10">Filmes</h1>
+        <div className="flex justify-center">
+        <div className="flex flex-col w-[1750px] m-8 ">
             <Slider {...settings}>
                 {filmes.map(filme => (
-                    <div className="ml-[85px]" key={filme.id}>
-                        <img className="rounded-lg border" src={`https://image.tmdb.org/t/p/w400/${filme.poster_path}`} alt={filme.title} />
+                    <div className="ml-[145px]"   key={filme.id}>
+                        <img className= "rounded-lg border" src={`https://image.tmdb.org/t/p/w300/${filme.poster_path}`} alt={filme.title} />
                         <h1 className="text-white flex justify-start mt-1 mb-2">{filme.title}</h1>
-                        <Link to={`/${filme.id}`} className="hover:bg-gray-400 hover:duration-200 bg-white text-black rounded-lg flex items-center mr-[190px] justify-center font-K2D font-bold p-1">
+                        <Link to={`/${filme.id}`} className="bg-white text-black rounded-lg flex items-center mr-[284px] justify-center font-bold p-1">
                         Detalhes do Filme
                         </Link>
                         </div>
                     ))}
             </Slider>
+        </div>
         </div>
         </>
     )
