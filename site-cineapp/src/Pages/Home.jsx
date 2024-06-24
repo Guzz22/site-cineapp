@@ -1,40 +1,44 @@
-import data from '../../artigos.json'
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 function Home() {
-    return ( 
-       
+    const [filmes, setFilmes] = useState([])
+
+    const settings = {
+        Infinite:true,
+        speed: 500,
+        slidesToShow: 3,
+        slidesToScroll: 3    
+    };
+    
+    useEffect(()=>{
+        fetch('https://api.themoviedb.org/3/movie/popular?api_key=7c572a9f5b3ba776080330d23bb76e1e')
+        .then(response => response.json())
+        .then(response => setFilmes(response.results))
+        .catch(error => console.log(error))
+    },[])
+    
+    return (
         <>
-
-        <div className='grid grid-cols-3 gap-3'>
-        {data.map(
-            (filme, index) => (
-                <div className='card' key={index}>
-                    <h1>{filme.title}</h1>
-                    <img className="mb-2" src={filme.image} alt={filme.title}/>
-                    <div className="tags">
-                        
-                        {filme.tags.map(tag => (
-                            <span className="bg-green-800  text-black p-1 m-1" key={tag}>{tag}</span>
-                        ))}
-                        
-                    </div>
-    <div className="texto">
-        {filme.text.map((texto, tag)=>(
-            <p key={tag}>{texto}</p>
-        ))}
-
-
-    </div>
-                </div>
-            )
-
-        )}
+        <h1 className="flex justify-center text-3xl text-white font-MontaguSlab mt-10 mb-10">Filmes</h1>
+        <div className="flex flex-col w-[1780px] m-8 ml-[55px]">
+            <Slider {...settings}>
+                {filmes.map(filme => (
+                    <div className="ml-[85px]" key={filme.id}>
+                        <img className="rounded-lg border" src={`https://image.tmdb.org/t/p/w400/${filme.poster_path}`} alt={filme.title} />
+                        <h1 className="text-white flex justify-start mt-1 mb-2">{filme.title}</h1>
+                        <Link to={`/${filme.id}`} className="hover:bg-gray-400 hover:duration-200 bg-white text-black rounded-lg flex items-center mr-[190px] justify-center font-K2D font-bold p-1">
+                        Detalhes do Filme
+                        </Link>
+                        </div>
+                    ))}
+            </Slider>
         </div>
-       
-
         </>
-      
-    );
+    )
 }
-
+ 
 export default Home;

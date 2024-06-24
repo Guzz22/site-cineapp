@@ -5,11 +5,10 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {
-      colors:{
-        'primary-thompson': '#365314'
-      }
+    fontFamily: {
+      "Inter": ["Inter", "sans-serif"]
     },
+    extend: {},
   },
   plugins: [],
 }
